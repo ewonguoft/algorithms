@@ -94,6 +94,46 @@ class Algorithms{
         }
         return strings;
       }
+    /*
+    Given an array of strings, return a Map<String, Boolean> where 
+    each different string is a key and its value is true if that 
+    string appears 2 or more times in the array.
+    */
+    public Map<String, Boolean> wordMultiple(String[] strings) {
+    Map<String, Boolean> map=new HashMap<String,Boolean>();
+    
+    for (String currentString:strings) {
+        if (map.containsKey(currentString)) {
+            map.put(currentString, true);
+        } else {
+            map.put(currentString,false);
+        }
+    
+    }
+    return map;
+    }
+    
+    /*
+    Loop over the given array of strings to build a result string like this: 
+    when a string appears the 2nd, 4th, 6th, etc. time in the array, append 
+    the string to the result. Return the empty string if no string appears a 2nd time.
+    */
+    public String wordAppend(String[] strings) {
+        HashMap<String,Integer> map = new HashMap<String,Integer>();
+        String final_word = "";
+        for(int i=0; i<strings.length; i++){
+          String word = strings[i];
+          if(map.containsKey(word)){
+            map.put(word, map.get(word)+1 );
+            if(map.get(word)%2 == 0){
+              final_word = final_word+word;
+            }
+          }else{
+            map.put(word, 1);
+          }
+        }
+        return final_word;
+      }
       
 
     public static void main(String[] args) {
@@ -114,13 +154,25 @@ class Algorithms{
         */
 
         //firstSwap
+        /*
         String arr3[] = {"ax", "bx", "cx", "cy", "by", "ay", "aaa", "azz"};
         String result[] = alg.firstSwap(arr3);
 
         for(int i=0; i<arr3.length; i++){
             System.out.println(arr3[i]);
         }
+        */
 
+        //wordMultiple
+        /*
+        String arr4[] = {"a", "b", "a", "c", "b"};
+        HashMap<String,Boolean> map = alg.wordMultiple(arr4);
+        */
+
+        //wordAppend
+        String arr5[] = {"not", "and", "or", "and", "this", "and", "or", "that", "not"};
+        String result = alg.wordAppend(arr5);
+        System.out.println("The final word is: " + result);
     }
     
 }
