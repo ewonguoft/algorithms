@@ -134,7 +134,45 @@ class Algorithms{
         }
         return final_word;
       }
-      
+    //Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+    public ArrayList<String> genParenth(ArrayList<String> ans, String cur, int max, int open, int close){
+        if(cur.length()==max*2){
+            ans.add(cur);
+            return ans;
+        }
+
+        if(open<max){
+            genParenth(ans, cur+"(", max, open+1, close);
+        }
+        if(close<open){
+            genParenth(ans, cur+")", max, open, close+1);
+        }
+
+        return ans;
+    }
+
+    //Given an array of strings, group anagrams together.
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,List<String>> sol = new HashMap<String,List<String>>();
+        
+        for(int i = 0; i<strs.length; i++){
+            String input = strs[i];
+            char[] charArray = input.toCharArray();
+            Arrays.sort(charArray);
+            String sortedString = new String(charArray);
+            if(sol.containsKey(sortedString)){
+                List<String> in = sol.get(sortedString);
+                in.add(input);
+                sol.put(sortedString, in );
+            }else{
+                List<String> in = new ArrayList<String>();
+                in.add(input);
+                sol.put(sortedString, in);
+            }
+        }
+        return new ArrayList(sol.values());
+    }
 
     public static void main(String[] args) {
 
@@ -170,9 +208,19 @@ class Algorithms{
         */
 
         //wordAppend
+        /*
         String arr5[] = {"not", "and", "or", "and", "this", "and", "or", "that", "not"};
         String result = alg.wordAppend(arr5);
         System.out.println("The final word is: " + result);
+        */
+        //genParenth
+        /*
+        ArrayList<String> result = new ArrayList<String>();
+        result = alg.genParenth(result, "", 4, 0, 0);
+        for (String var : result) {
+            System.out.println(var);
+        }
+        */
     }
     
 }
